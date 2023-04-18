@@ -9,9 +9,19 @@ class TreeNode:
         child.parent = self
         self.children.append(child)
 
+    def get_level(self):
+        level = 0
+        p = self.parent
+        while p:
+            p = p.parent
+            level += 1
+        return level
+
 
     def printTree(self):
-        print(self.data)
+        spaces = ' ' * self.get_level() * 3
+        prefix = spaces + "|__" if self.parent else ""
+        print(prefix + self.data)
         if self.children:
             for child in self.children:
                 child.printTree()
@@ -32,3 +42,4 @@ def build_tree():
 if __name__ == '__main__':
     root = build_tree()
     root.printTree()
+    pass
