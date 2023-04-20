@@ -26,6 +26,27 @@ class Graph:
                     paths.append(path)
         return paths
 
+    def get_shortest_path(self, start, end, path=[]):
+        path = path + [start]
+
+        if start == end:
+            return path
+
+        if start not in self.graph_dict:
+            return None
+
+        shortestpath = None
+        for node in self.graph_dict[start]:
+            if node not in path:
+                sp = self.get_shortest_path(node, end, path)
+                if sp:
+                    if shortestpath is None or len(sp) < len(shortestpath):
+                        shortestpath = sp
+        return shortestpath
+
+
+
+
 
 if __name__ == '__main__':
     routes = [
@@ -36,6 +57,9 @@ if __name__ == '__main__':
         ('New York', 'Toronto')
     ]
     route_graph = Graph(routes)
+
     start = "Mumbai"
     end = "New York"
-    print(f"Path b/w {start} and {end}",route_graph.get_paths(start, end))
+
+    # print(f"Path b/w {start} and {end}",route_graph.get_paths(start, end))
+    print(f"Shortest b/w {start} and {end}", route_graph.get_shortest_path(start, end))
