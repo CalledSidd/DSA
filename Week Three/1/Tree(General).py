@@ -18,13 +18,13 @@ class TreeNode:
         return level
 
 
-    def printTree(self):
+    def print(self):
         spaces = ' ' * self.get_level() * 3
         prefix = spaces + "|__" if self.parent else ""
         print(prefix + self.data)
         if self.children:
             for child in self.children:
-                child.printTree()
+                child.print()
 
 def build_tree():
     root = TreeNode("Devices")
@@ -41,5 +41,5 @@ def build_tree():
 
 if __name__ == '__main__':
     root = build_tree()
-    root.printTree()
+    root.print()
     pass
